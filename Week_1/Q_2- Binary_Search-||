@@ -1,0 +1,53 @@
+
+
+#include <iostream>
+using namespace std;
+int static comp =0;                                                             // Static declaration and initalization of comp variable
+int binary_search(int a[],int s,int f,int l,int key)                                    
+{
+    int mid;
+    if(l>=f)
+    {
+        mid = (l+f)/2;                                                                 // Recursive Fuction for Binary_Search
+        if(a[mid]==key)                                                   
+        {
+            comp++;
+            return mid;
+        }
+        if(a[mid]>key){
+            comp++;
+             binary_search(a,s,f,mid-1,key);
+            
+        comp++;
+         binary_search(a,s,mid+1,l,key);
+        }
+    }
+}
+int main()
+{
+    int s,i,key,c=0,r=-1;
+    cout<<"Enter the size of the array\n";                                         // User input array size
+    cin>>s;
+    int a[s];
+    cout<<"Enter the elements of the Array\n";                                 
+    for(int i=0;i<s;i++)
+    {
+        cin>>a[i];                                                                // User input array elements
+    }
+
+    cout<<"Enter the element to be searched\n";
+    cin>>key;
+    r = binary_search(a,s,0,s-1,key);
+   
+    if(r==-1)
+    {
+        cout<<"Element not found\n";                                             // Print "-1" if element not found
+        cout<<"-1";
+    }
+    else
+    {
+        cout<<"Element is found at position = "<<r<<endl;
+        cout<<"Total number of comparisons = "<<comp;                           // No of comparisons
+    }
+    return 0;
+}
