@@ -1,0 +1,34 @@
+
+
+#include <iostream>
+
+using namespace std;
+
+int main()
+{
+    int n;
+    cin>>n;
+    int a[n];
+    for(int i=0;i<n;i++)
+    cin>>a[i];
+    int sm = 0;
+    for(int i=0;i<n;i++)
+    {
+        sm = i;
+      for(int j=i+1;j<n;j++)
+        {
+            if(a[j]<a[sm])
+            {
+                sm=j;
+            }
+        }
+            int temp = a[sm];
+            a[sm] = a[i];
+            a[i] = temp;
+        }  
+    
+
+    for(int i=0;i<n;i++)
+    cout<<a[i]<<" ";
+    return 0;
+}
