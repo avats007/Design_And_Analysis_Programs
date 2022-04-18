@@ -1,0 +1,44 @@
+
+
+#include <iostream>
+#include<unordered_map>
+#include<list>
+#include<algorithm>
+using namespace std;
+
+int main()
+{
+    unordered_map<int,int> m;
+    list<int> l;
+    int ms,n;
+    cout<<"Enter m and n: ";
+    cin>>ms>>n;
+    int a[ms],b[n];
+    
+    cout<<"Enter the arrays\n";
+    for(int i=0;i<ms;i++)
+    {
+        cin>>a[i];
+    }
+      for(int i=0;i<n;i++)
+    {
+        cin>>b[i];
+    }
+    sort(a,a+ms);
+    sort(b,b+n);
+    for(int i=0;i<n;i++)
+    {
+        m[b[i]]=i;
+    }
+    for(int j=0;j<ms;j++)
+    {
+        if(m.find(a[j])!=m.end()){
+            l.push_back(a[j]);
+        }
+    }
+    for(auto it=l.begin();it!=l.end();it++){
+        cout<<*it<<" ";
+    }
+
+    return 0;
+}
