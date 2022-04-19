@@ -1,78 +1,75 @@
 
 
-#include<stdio.h>
-int merge_sort(int arr[],int lb,int ub)
-{
-       int mid=0;
-    if(lb<ub)
-    {
+#include <iostream>
 
-        mid=(lb+ub)/2;
-        merge_sort(arr,lb,mid);
-        merge_sort(arr,mid+1,ub);
-        merge(arr,lb,ub,mid);
+using namespace std;
+
+void merge(int arr[],int l,int m,int r){
+    
+    int n1 = (m-l+1);                           // (upper_bound - lower_bound + 1)
+    int n2 = r-m;                               // (upper_bound - lower_bound + 1)        
+    
+    int left[n1],right[n2];
+    
+    for(int i=0;i<n1;i++){
+        left[i] = arr[l+i];
+    }
+    
+    for(int j=0;j<n2;j++){
+        right[j] = arr[m+1+j];
+    }                                             // Merge-Function to merge arays in sorted format
+    
+    int i=0,j=0,k=l;
+    
+    while(i<n1 && j<n2){
+        
+        if(left[i] <= right[j]){
+            arr[k++] = left[i++];
+        }
+        
+        else
+            arr[k++] = right[j++];
+    }
+    
+    while(i<n1)
+       arr[k++] = left[i++];
+       
+    while(j<n2)
+       arr[k++] = right[j++];
+}
+
+void merge_sort(int arr[],int l,int r){
+    
+    if(l<r){
+       
+       int m = (l+r)/2;
+       
+       merge_sort(arr,l,m);                                              // Calling Merge_Sort for left half array
+       merge_sort(arr,m+1,r);                                           // Calling Merge_Sort for Right half array
+       merge(arr,l,m,r);
     }
 }
- void merge(int arr[],int lb,int ub,int mid)
-{
-    int b[100];
-    int i=lb;
-    int j=mid+1;
-    int k=lb;
-    while(i<=mid&&j<=ub)
-    {
-        if(arr[i]<arr[j])
-        {
-            b[k]=arr[i];
-            i++;
-            k++;
-        }
-        else
-        {
-            b[k]=arr[j];
-            j++;
-            k++;
-        }
-    }
-    if(i>mid)
-    {
-        while(j<=ub)
-        {
-            b[k]=arr[j];
-            j++;
-            k++;
-        }
-    }
-        else
-        {
-            while(i<=mid)
-            {
-                b[k]=arr[i];
-                i++,k++;
-            }
-        }
 
-    for(int k=lb;k<=ub;k++)
-    {
-        arr[k]=b[k];
-    }
-}
 int main()
 {
-    int n;
-    printf("enter numbers in array:");
-    cin>>n;
+    int n,i;
+    cout<<"Enter the size of the array\n";
+    
+    cin>>n;                                                             // User input Array size
+    
     int arr[n];
-    for(int i=0;i<n;i++)
-    {
-        cin>>arr[i];
-    }
-    int lb=0,ub=n-1;
+    
+    cout<<"Enter the elements of the array\n";
+    
+    for(i=0;i<n;i++)
+    cin>>arr[i];                                                         // User input array elements
+    
+    int l=0,r=n-1;
+    merge_sort(arr,l,r);                                                 // Calling Merge-Sort function
+    
+    cout<<"Array after Merge-Sort is: "; 
+    for(int i=0;i<n;i++)                               
+    cout<<arr[i]<<" ";                                                    // Print Sorted Array
 
-    merge_sort(arr,lb,ub);
-    for(int i=0;i<n;i++)
-    {
-        cout<<arr[i];
-    }
     return 0;
 }
