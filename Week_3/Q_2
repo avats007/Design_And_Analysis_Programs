@@ -1,49 +1,31 @@
-#include <iostream>
-#include <algorithm>                    // Header-file under which sort works
-#include<unordered_map>
-#include<vector>
-using namespace std;
-
-int main(){
-    unordered_map<int,int> m;
-    vector<int> v;
-    
-    int n,i,k,sum;
-    cout<<"Enter the size of the array\n";
-    cin>>n;
-    
-    int arr[n];
-    
-    cout<<"Enter the elements of the array\n";
-    
-    for(i=0;i<n;i++)
-    cin>>arr[i];
-    
-    sort(arr,arr+n);
-    
-    for(k=0;i<n;i++)
-    m[arr[k]] = k;
-    
-   i=0;
-   int j=n-1;
-   while(i<j){
-       sum = arr[i]+arr[j];
-       
-       if(m.find(sum)!=m.end()){
-           v.push_back(i);
-           v.push_back(j);
-           v.push_back(m[sum]);
-           break;
-       }
-       else{
-           i++;
-           j--;
-       }
-   }
-   for(auto it = v.begin(); it!=v.end(); it++)
-   {
-       cout<<*it;
-   }
-    
-    return 0;
+#include<iostream>
+using namespace std; 
+int main()
+{
+int arr[100]; int n,key,c=0;
+cout<<"Enter total number of elements in array"<<endl;
+cin>>n;
+for(int i=0;i<n;i++)
+{
+cin>>arr[i];
 }
+for(int k=n-1;k>=0;k--)
+{
+   int i=0; int j=k-1; 
+   while(i<j)
+  {
+      if(arr[i]+arr[j]==arr[k])
+     {
+       cout<<i<<","<<j<<","<<k<<endl; 
+       break;
+     }
+     else if(arr[i]+arr[j]>arr[k]) 
+       j--;
+     else
+       i++;
+  }
+}
+
+return 0;
+}
+
